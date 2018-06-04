@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>details</title>
+	<link rel="stylesheet" type="text/css" href="bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="col.css">
+</head>
+<body style="background-color: lightgray" class="ac">
+	<div class="row" style="height: 100px; background-color: violet">
+		<div class="col-md-2"></div>
+			<div class="col-md-7">
+			<h3 style="color: red ;font-size: 50px ; ">amruitha social network</h3></div>
+			<div class="col-md-3">
+			<div style="margin-top: 50px;font-size: 20px; align:left; "><a href="/profile/<%= user[0].name %>" style="color:white;" ><button class="btn-primary" style="text-align: left"> go to my Profile</button></a><a href="/logout"><button   type="button" class="btn-success">logout</button></a></div>
+			
+		</div>
+	</div>
+	
+	<div class="row" style="min-height: 30px;">
+		<div class="col-md-4"></div>
+		<h1 style="margin-left: 60px; color: orange">DASH BAOARD</h1>
+		 <% for(i=0;i<result.length;i++){ %>
+			
+		<div class="col-md-4" style="padding-left:40px; padding-right: 40px" >
+            <div class="thumbnail">
+				<img src="file:///C:/Users/varun%20kumar/Desktop/nodejs/public/varun.jpg.png "><br><br><br>
+				<h1>name :<%= result[i].name %></h1>
+                EMAIL : <%= result[i].email %><br>
+                username: <%= result[i].phnumber %><br>
+
+                <a href="/profile/<%= result[i].name %>"><button class="btn-lg btn-primary"type="submit">go to profile</button>
+</a> </div>
+			</div>
+			<% } %> 
+		</div>
+		
+	
+	
+
+</body>
+</html>

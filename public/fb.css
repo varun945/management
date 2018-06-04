@@ -1,0 +1,42 @@
+
+.a{
+	background-color: pink;
+	height: 1000px;
+	margin-top:10px;
+}
+.b{
+	background-color: blue;
+}
+.c{
+	background-color: orange;
+}
+.d{
+	background-color: red;
+	margin-left: 1000px;
+
+}
+.p{
+	background-color: blue;
+	height: 700px;
+}
+.q{
+	background-color: blue;
+	height: 100px;
+}
+.r{
+	margin-left: 200px;
+
+}
+.x{
+	padding-right: 100px;
+	margin-left: 400px;
+	
+}
+.y{
+	padding-right: 100px;
+	margin-right: 700px;
+	
+}
+.s{
+	background-color: pink;
+}
