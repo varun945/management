@@ -127,6 +127,6 @@ res.redirect('/login')
 
     
 
-app.listen(app.get('port',function(){
+app.listen(app.get('port'),function(){
 	console.log(' server is running plse wait....:9112')
 })
