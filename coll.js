@@ -16,8 +16,9 @@ app.set('port',process.env.PORT||5000)
 
 //var db = new datastore({filename:'db2',autoload:true})
 app.get('/signup',function(req,res){
-if(req.session.varun==true){
-	res.redirect('/loggedin');
+if(req.session.users==true){
+	db.admin.find({doc},function(req,res){
+	res.render('coll',{result:newdoc,user:req.session.username});})
 }
 else{
 	res.sendFile(__dirname+'/public/collsignup.html');
@@ -26,20 +27,22 @@ else{
 	
 })
 app.get('/login',function(req,res) {
+
 if(req.session.varun==true){
-	res.redirect('/loggedin');
-}
+	db.admin.find({doc},function(req,res){
+	res.redirect('coll',{result:newdoc,user:req.session.username});
+})}
 else{
 	res.sendFile(__dirname+'/public/collsignin.html');
 }
 })
 
-app.get('/loggedin',function(req,res){
-	db.admin.find({},function(error,newdoc){
-   	  		res.render('coll',{result:newdoc,user:req.session.username});
+//app.get('/login',function(req,res){
+	//db.admin.find({},function(error,newdoc){
+   	  	//	res.render('coll',{result:newdoc,user:req.session.username});
    	  		
-         })
-})
+        // })
+//})
 app.post('/pa',function(req,res){
 
 	
@@ -56,7 +59,7 @@ app.post('/pa',function(req,res){
 	}
 	db.admin.insert(doc,function(err,newdoc){
 		if(err){
-			res.send('err occured');
+			res.send(' something went wrong  while entering data');
 		}
 		else{
 			//res.send(newdoc)
@@ -65,20 +68,18 @@ app.post('/pa',function(req,res){
 	})
 })
 app.post('/q',function(req,res){
-   //req.session.key='false';
+   req.session.users=false;
 var doc2={
    	email:req.body.email,
    	passward:req.body.passward
-     
-   	
-      }
+     }
       
-      db.admin.find(doc2,function(err,docs){
-   	  console.log(docs)
+     db.admin.find(doc2,function(err,docs){
+   	  
    	   
    	  if(docs.length>0)
    	  {
-   	  	req.session.varun=true;
+   	  	req.session.users=true;
    	  	req.session.username=docs;
    	  	
    	  	db.admin.find({},function(error,newdoc){
@@ -102,9 +103,9 @@ var doc2={
 
 app.get('/profile/:username',function(req,res){
 
-	//var username=req.params.username;
-	
-	db.admin.find({name:req.params.username},function(error,doc){
+	var username=req.params.username;
+	    if(req.session.users){
+	db.admin.find({username:username},function(error,doc){
 		//if(doc1.length>0){
 			//if(req.session.key=='true'){
 
@@ -115,7 +116,10 @@ app.get('/profile/:username',function(req,res){
 			//}
 			
 		//}
-	})
+	})}
+	else{
+		req.redirect('/login')
+	}
 
 })
 app.get('/logout',function(req,res){
